@@ -1,0 +1,33 @@
+import React, { createContext, Component } from 'react';
+
+export const ThemeContext = createContext();
+
+// create a class component
+class ThemeContextProvider extends Component {
+    // shared data
+    state = {
+        isLightTheme: true,
+        light: {
+            sintax: '#555',
+            ui: '#ddd',
+            bg: '#eee'
+        },
+        dark: {
+            sintax: '#ddd',
+            ui: '#333',
+            bg: '#555'
+        }
+    }
+    // value={{...this.state}} spread all the objetcts inside state
+    // to all other components
+    // output the children {this.props.children}
+    render() { 
+        return (
+            <ThemeContext.Provider value={{...this.state}}>
+                {this.props.children}
+            </ThemeContext.Provider>
+        );
+    }
+}
+ 
+export default ThemeContextProvider;
