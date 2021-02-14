@@ -166,7 +166,7 @@ export default Navbar;
 ```
 
 
-### Changing data inside Context
+### 6 - Changing data inside Context
 
 ```javascript
 // ThemeContext.js
@@ -260,7 +260,7 @@ export default App;
 https://www.youtube.com/watch?v=bJXAHHpyVes&list=PL4cUxeGkcC9hNokByJilPg5g9m2APUePI&index=6
 
 
-## Using Multiple Context Providers in App
+### 7 - Using Multiple Context Providers in App
 
 ```javascript
 // App.js
@@ -286,6 +286,49 @@ function App() {
 }
 
 export default App;
+```
+
+
+### 8 - Consuming Multiple Contexts
+
+Two Consumer tags
+
+```javascript
+// Navbar.js
+import React, { Component } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
+import { ThemeContext } from '../contexts/ThemeContext';
+
+class Navbar extends Component {
+  // static contextType = ThemeContext;
+  render() {
+    return (
+        <AuthContext.Consumer>{(authContext) => (
+            <ThemeContext.Consumer>{(context) => {
+                const { isAuthenticated, toggleAuth } = authContext;
+                const { isLightTheme, light, dark } = context;
+                const theme = isLightTheme ? light : dark;
+                return (
+                  <nav style={{ background: theme.ui, color: theme.syntax }}>
+                    <h1>Context App</h1>
+                    <div onClick={ toggleAuth }>
+                        { isAuthenticated ? 'Logged in' : 'Logged out' }
+                    </div>
+                    <ul>
+                      <li>Home</li>
+                      <li>About</li>
+                      <li>Contact</li>
+                    </ul>
+                  </nav>
+                )
+              }}</ThemeContext.Consumer>
+        )}
+        </AuthContext.Consumer>
+    );
+  }
+}
+ 
+export default Navbar;
 ```
 
 

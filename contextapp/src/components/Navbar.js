@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 
 class Navbar extends Component {
-    // theme context provided by parent components
-    static contextType = ThemeContext;
-    render() { 
-        return  (
-            // ThemeContext.Consumer expects a funcion 
-            // that return an JSX
+  // static contextType = ThemeContext;
+  render() {
+    return (
+        <AuthContext.Consumer>{(authContext) => (
             <ThemeContext.Consumer>{(context) => {
-                // printout the context data passed through the provided
-                console.log(context);
-                // destructuring all the values in context
-                const {isLightTheme, light, dark} = context;
+                const { isAuthenticated, toggleAuth } = authContext;
+                const { isLightTheme, light, dark } = context;
                 const theme = isLightTheme ? light : dark;
                 return (
-                    // coloring the theme according to the context state
-                    <nav style={{ background: theme.ui, color: theme.syntax }}>
-                        <h1>Conext App</h1>
-                        <ul>
-                            <li>Home</li>
-                            <li>About</li>
-                            <li>Contact</li>
-                        </ul>
-                    </nav>
+                  <nav style={{ background: theme.ui, color: theme.syntax }}>
+                    <h1>Context App</h1>
+                    <div onClick={ toggleAuth }>
+                        { isAuthenticated ? 'Logged in' : 'Logged out' }
+                    </div>
+                    <ul>
+                      <li>Home</li>
+                      <li>About</li>
+                      <li>Contact</li>
+                    </ul>
+                  </nav>
                 )
-            }}</ThemeContext.Consumer>
-        )
-    }
+              }}</ThemeContext.Consumer>
+        )}
+        </AuthContext.Consumer>
+    );
+  }
 }
  
 export default Navbar;
