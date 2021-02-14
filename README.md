@@ -164,6 +164,98 @@ export default Navbar;
 ```
 
 
+### Changing data inside Context
+
+```javascript
+// ThemeContext.js
+import React, { createContext, Component } from 'react';
+
+export const ThemeContext = createContext();
+
+// create a class component
+class ThemeContextProvider extends Component {
+    // shared data
+    state = {
+        isLightTheme: true,
+        light: {
+            sintax: '#555',
+            ui: '#ddd',
+            bg: '#eee'
+        },
+        dark: {
+            sintax: '#ddd',
+            ui: '#333',
+            bg: '#555'
+        }
+    }
+    // function to toggle the theme
+    toggleTheme = () => {
+        this.setState({ isLightTheme: !this.state.isLightTheme })
+    }
+    // value={{...this.state}} spread all the objetcts inside state
+    // to all other components
+    // output the children {this.props.children}
+    render() { 
+        return (
+            // add a funcion to other children components
+            <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme}}>
+                {this.props.children}
+            </ThemeContext.Provider>
+        );
+    }
+}
+ 
+export default ThemeContextProvider;
+```
+
+Button to toggle theme
+
+```javascript
+// ThemeToggle.js
+
+import React, { Component } from 'react';
+import { ThemeContext } from '../contexts/ThemeContext';
+
+class ThemeToggle extends Component {
+    static contextType = ThemeContext;
+    render() { 
+        console.log(this.context)
+        // distructing toggleTheme funtion from context
+        const { toggleTheme } = this.context;
+        return (
+            <button onClick={toggleTheme}>Toggle the theme</button>
+        );
+    }
+}
+ 
+export default ThemeToggle;
+```
+
+```javascript
+// App.js
+import React from 'react';
+import BookList from './components/BookList';
+import Navbar from './components/Navbar';
+import ThemeToggle from './components/ThemeToggle';
+import ThemeContextProvider from './contexts/ThemeContext';
+
+function App() {
+  return (
+    <div className="App">
+      <ThemeContextProvider>
+        <Navbar />
+        <BookList />
+        <ThemeToggle />
+      </ThemeContextProvider>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+
 ## Utils
 
 ## VSCode Simple React Snippets
