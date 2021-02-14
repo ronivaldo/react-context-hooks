@@ -2,6 +2,8 @@
 
 React Context &amp; Hooks Tutorial from The Net Ninja
 
+https://www.youtube.com/watch?v=bJXAHHpyVes&list=PL4cUxeGkcC9hNokByJilPg5g9m2APUePI&index=1
+
 # Steps
 
 
@@ -255,10 +257,83 @@ export default App;
 
 ```
 
+https://www.youtube.com/watch?v=bJXAHHpyVes&list=PL4cUxeGkcC9hNokByJilPg5g9m2APUePI&index=6
+
+
+
+## Tips
+
+### Use ES6 destructuring syntax
+
+Inside the onInputChange method, we have code like this:
+
+```javascript
+const name = event.target.name;
+const value = event.target.value;
+```
+We can use ES6 destructuring syntax to simplify it like this:
+
+```javascript
+const { name, value } = event.target;
+```
+
+### Simplify arrow functions
+
+In an arrow function, if we have code like this:
+
+```javascript
+const add = (a, b) => {
+ return a + b;
+}
+```
+
+Then we can simplify it as shown below:
+
+```javascript
+const add = (a, b) => a + b;
+```
+
+So if we're returning an object from arrow function like this:
+
+```javascript
+const getUser = () => {
+ return {
+  name: 'David,
+  age: 35
+ }
+}
+```
+
+To make it work we can wrap the object in round brackets like this:
+
+```javascript
+const getUser = () => ({
+  name: 'David,
+  age: 35
+})
+```
+
+So we can use the same technique to simplify our setState function call.
+
+```javascript
+setState((prevState) => {
+  return {
+    ...prevState,
+    [name]: value
+  };
+});
+
+// the above code can be simplified as:
+setState((prevState) => ({
+  ...prevState,
+  [name]: value
+}));
+```
+
 
 ## Utils
 
-## VSCode Simple React Snippets
+### VSCode Simple React Snippets
 
 Simple React Snippets
 
@@ -266,7 +341,14 @@ Simple React Snippets
 
 https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
 
+### React Data Fecth Cheatsheet
 
+https://www.freecodecamp.org/news/fetch-data-react/
+
+[React Data Fecth Cheatsheet](./utils/The_React_Data_Fetching_Cheatsheet_(2021).pdf)
+
+More helpful content:
+https://www.freecodecamp.org/news/author/reed/
 
 
 

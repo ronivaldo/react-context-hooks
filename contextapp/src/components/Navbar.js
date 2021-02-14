@@ -11,7 +11,7 @@ class Navbar extends Component {
             <ThemeContext.Consumer>{(context) => {
                 // printout the context data passed through the provided
                 console.log(context);
-                // distructing all the values in context
+                // destructuring all the values in context
                 const {isLightTheme, light, dark} = context;
                 const theme = isLightTheme ? light : dark;
                 return (

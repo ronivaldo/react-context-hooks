@@ -5,7 +5,7 @@ class ThemeToggle extends Component {
     static contextType = ThemeContext;
     render() { 
         console.log(this.context)
-        // distructing toggleTheme funtion from context
+        // destructuring toggleTheme funtion from context
         const { toggleTheme } = this.context;
         return (
             <button onClick={toggleTheme}>Toggle the theme</button>
