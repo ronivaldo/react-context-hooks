@@ -260,6 +260,34 @@ export default App;
 https://www.youtube.com/watch?v=bJXAHHpyVes&list=PL4cUxeGkcC9hNokByJilPg5g9m2APUePI&index=6
 
 
+## Using Multiple Context Providers in App
+
+```javascript
+// App.js
+import React from 'react';
+import BookList from './components/BookList';
+import Navbar from './components/Navbar';
+import ThemeToggle from './components/ThemeToggle';
+import AuthContextProvider from './contexts/AuthContext';
+import ThemeContextProvider from './contexts/ThemeContext';
+
+function App() {
+  return (
+    <div className="App">
+      <ThemeContextProvider>
+        <AuthContextProvider>
+          <Navbar />
+          <BookList />
+          <ThemeToggle />
+        </AuthContextProvider>
+      </ThemeContextProvider>
+    </div>
+  );
+}
+
+export default App;
+```
+
 
 ## Tips
 
