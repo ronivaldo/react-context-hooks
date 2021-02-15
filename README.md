@@ -401,6 +401,79 @@ setState((prevState) => ({
 }));
 ```
 
+# React Hooks
+
+Special funtions to allow do additional things inside funcional componenets as we could do only in Class Components.
+
+### Create New App
+
+```bash
+npx create-react-app hooksapp
+```
+
+Create a song list.
+
+```javascript
+// SongList.js
+import React from 'react';
+
+const SongList = () => {
+  return (
+    <div className="song-list">
+      <ul>
+        <li>this wild darkness</li>
+        <li>memory gospel</li>
+      </ul>
+    </div>
+  );
+}
+```
+export default SongList;
+
+### useState()
+
+Use state to save data.
+
+```javascript
+// SongList.js
+import React, { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+
+const SongList = () => {
+  const [songs, setSongs] = useState([
+    { title: 'almost home', id: 1 },
+    { title: 'memory gospel', id: 2 },
+    { title: 'this wild darkness', id: 3 }
+  ]);
+  //console.log(songs);
+  const addSong = () => {
+    setSongs([...songs, { title: 'new song', id: uuid() }]);
+  };
+  return (
+    <div className="song-list">
+      <ul>
+        {songs.map(song => {
+          return ( <li key={song.id}>{song.title}</li> );
+        })}
+      </ul>
+      <button onClick={addSong}>Add a song</button>
+    </div>
+  );
+}
+
+export default SongList;
+```
+
+Install package uuid
+
+```bash
+cd .\hooksapp\
+npm install uuid
+```
+
+### useEffect()
+
+### useContext()
 
 ## Utils
 
