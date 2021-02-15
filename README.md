@@ -471,6 +471,52 @@ cd .\hooksapp\
 npm install uuid
 ```
 
+#### useState with Forms
+
+When user types anything in forms we would like to store the entered data into state variables.
+
+Passing the addSong function to the NewSongForm.
+
+```javascript
+// SongList.js
+...
+      <NewSongForm addSong={addSong} />
+...
+```
+
+Add the function to arguments.
+
+```javascript
+// NewSongForm.js
+import React, { Component, useState } from 'react';
+
+const NewSongForm = ({ addSong }) => {
+    // state for title
+    const [title, setTitle] = useState('');
+    // fire a function when user types
+    // e.target.value keeps the value of the element
+    // prevent submitting the form
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addSong(title);
+        setTitle('');
+    }
+    // <input type="text" value={title} required onChange={(e) => setTitle(e.target.value)} />
+    // value={title} -> reads the value
+    // onChange={(e) => setTitle(e.target.value)} -> sets the value
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>Song name:</label>
+            <input type="text" value={title} required onChange={(e) => setTitle(e.target.value)} />
+            <input type="submit" value="add song" />
+        </form>
+
+    );
+}
+
+export default NewSongForm;
+```
+
 ### useEffect()
 
 ### useContext()
