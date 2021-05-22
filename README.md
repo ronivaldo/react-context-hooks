@@ -537,6 +537,9 @@ https://www.freecodecamp.org/news/fetch-data-react/
 
 [React Data Fecth Cheatsheet](./utils/The_React_Data_Fetching_Cheatsheet_(2021).pdf)
 
+[The React Props Cheatsheet](./utils/The_React_Props_Cheatsheet_(2021).pdf)
+
+
 More helpful content:
 https://www.freecodecamp.org/news/author/reed/
 
